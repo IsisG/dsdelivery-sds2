@@ -48,4 +48,15 @@ public class OrderService {
 		return new OrderDTO(order);
 		
 	}
+	
+	@Transactional
+	public OrderDTO setDelivered(Long id) {
+		//instancia objeto, que estará seno monitorado pelo JPA, só qnd salva vai no banco
+		Order order  = repository.getOne(id);
+		order.setStatus(OrderStatus.DELIVERED);
+		order = repository.save(order);
+		return new OrderDTO(order);
+	}
+	
+	
 }
